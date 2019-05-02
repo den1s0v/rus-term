@@ -4,7 +4,10 @@ import re
 import pandas as pd
 
 # import our class Family & more...
-from concepts.word_family import *
+# from concepts.word_family import *
+
+# from concepts.extract_terms import *?
+from concepts.extract_terms import ExtractTerms
 
 
 text_sep_re = re.compile(r"(?<=[.!?])\s+(?=[A-ZА-ЯЁ])|(?<=\n)\s+(?=[A-ZА-ЯЁ](?![A-ZА-ЯЁ]))");
@@ -51,6 +54,9 @@ class Sentence:
 #         print(self.word_list)
         
         
+    def __len__(self):
+        return len(self.word_list)
+        
     def size(self):
         return len(self.word_list)
         
@@ -75,7 +81,7 @@ class Chapter:  # Глава
         self.beginpos = self.sentence_list[0].beginpos
         self.endpos = self.sentence_list[-1].endpos
         # reset cached weights if any
-        self.__weights_cache = None
+        self.__time_weights_cache = None
         
     def size(self):
         return len(self.sentence_list)
@@ -94,7 +100,7 @@ class Chapter:  # Глава
     def raw_weights(self):
         "returns list[float]"
         # if not self.__weights_cache:
-            # self.__weights_cache = [s.size() for s in self.sentence_list]
+        #     self.__weights_cache = [s.size() for s in self.sentence_list]
         # return self.__weights_cache
         return [s.size() for s in self.sentence_list]
 
@@ -105,9 +111,11 @@ class Chapter:  # Глава
         return self.__time_weights_cache
 
     def _weights2time_index(self, profile_weights):
-        # convert weights into a time series.
-        # A weight is just a length of a sentence.
-        # Assume that one word equals to one second of time.
+        """
+        convert weights into a time series.
+        A weight is just a length of a sentence.
+        Assume that one word equals to one second of time.
+        """
         start_ts = pd.Timedelta(seconds=0)  # pd.Timestamp(2000, 1, 1)
         current_ts = start_ts + pd.Timedelta(seconds=0)
 
@@ -245,16 +253,20 @@ def make_chapter_from_sentences(sentences):
 
 
 def zero_all_below_treshold(df, treshold):
-    "Replaces with 0 all values that below treshold."
-    "returns new pd.DataFrame"
+    """
+    Replaces with 0 all values that below treshold.
+    returns new pd.DataFrame
+    """
     # заменим нулями все значения, меньшие порогового
     return df[df >= treshold].fillna(0)
 
 
 def prepare_df4corr(dataframe, treshold4part, treshold4text):
-    "Lowers down to zero small values below treshold4part."
-    "Drops out columns for words with total count below treshold4text."
-    "returns new pd.DataFrame"
+    """
+    Lowers down to zero small values below treshold4part.
+    Drops out columns for words with total count below treshold4text.
+    returns new pd.DataFrame
+    """
     df = zero_all_below_treshold(dataframe, treshold4part)
     
     for i1 in df.columns: # ["семейство"]['типам']
