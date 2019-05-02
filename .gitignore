@@ -1,6 +1,8 @@
 /\.*/
 /__*/
-.pkl
+*.pkl
+*.txt
 *corpus*/*.txt
-checkpoint
+*checkpoint*
+*.zip
 
