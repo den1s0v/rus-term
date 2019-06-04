@@ -6,7 +6,7 @@ from main_run import prepare_dir
 
 if __name__ == '__main__':
 
-    print('\n =========== START DEMO ===========\n')
+    print('\n =========== START DEMO ===========\n', flush=True)
 
     prepare_dir("result")
 
