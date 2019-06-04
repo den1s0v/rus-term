@@ -2,11 +2,13 @@
 
 from definition_pattern import *
 from eval_utils import dump_data
+from main_run import prepare_dir
 
 if __name__ == '__main__':
 
     print('\n =========== START DEMO ===========\n')
 
+    prepare_dir("result")
 
     book_dir = './text-corpus/'
 
