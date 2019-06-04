@@ -288,12 +288,54 @@ class ExtractTerms(object):
     def clear_cahe(self):
         self._morph_parse_cache.clear()
 
+    
+
+
+class Lemmatizer(object):
+    """ Лемматизатор с опциональным словарём допустимых лемм """
+    
+    def __init__(self, morph, terms_list=None, morph_parse_cache=None):
+        """ Инициализировать Лемматизатор
+            terms_list - список объектов-терминов, содержащих поле `lemmas` с леммами (каждый)
+            morph - экземпляр морфолог. анализаторалл (pymorphy2.Morph) 
+            morph_parse_cache - словарь (dict), содержащий кеш запросов к pymorphy2.Morph.parse(). Если задан, то будет использоваться и обновляться, если нет - то не будет создан.
+        """
+        self.morph = morph
+        self._morph_parse_cache = morph_parse_cache
+        self.lemmas = None
+        if terms_list:
+            self.set_lemmas_from_terms(terms_list)
+
+    def set_lemmas_from_terms(self, terms_list):
+        self.lemmas = {w for t in terms_list for lemma_list in t.lemmas for w in lemma_list}
+
+    def lemmatize_word(self, word):
+        """ Выполнить лемматизацию слова и вернуть список лемм.
+            Если предварительно задан перечень допустимых лемм, то останутся только
+            допустимые леммы.
+        returns: set(str) - множество лемм слова в виде строк """
+        
         # гипотезы морфологического разбора
-        hyps = self.morph.parse(str(word))
+        hyps = self.morph_parse(str(word))
         # множество лемм-гипотез
         lemmas_set = {p.normal_form for p in hyps}
-        return lemmas_set.intersection(lemmas_base)
+        return lemmas_set.intersection(self.lemmas)  if self.lemmas else  lemmas_set
+
+    def __call__(self, word):
+        return self.lemmatize_word(word)
+
+    def morph_parse(self, word):
         
+        if self._morph_parse_cache and word in self._morph_parse_cache:
+            return self._morph_parse_cache[word]
+        
+        hyps = self.morph.parse(word)
+        if self._morph_parse_cache:
+            # update cache
+            self._morph_parse_cache[word] = hyps
+            return hyps
+    
+
 
 def load_wordset(stops_file):
     " Загрузить список слов, например стоп-слова "
