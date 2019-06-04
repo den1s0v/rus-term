@@ -56,3 +56,10 @@ pip install rutermextract
 pip install pymorphy2
 pip install rutermextract
 </pre>
+
+
+### Совет по настройке русских букв в Git Bash (если Вы пользуетесь им)
+Откройте *Контекстное меню* -> **Options** -> **Text**
+
+![Опции Git Bash](git-bash-RU_setup.png "Настройка русских букв в Git Bash")
+
