@@ -258,7 +258,7 @@ class Chapter(object):  # Глава
         """Extract nominal groups from the text"""
         assert self.text
         self.__extract_terms = self.__extract_terms or ExtractTerms(
-                stopwords_file=stopwords_file or ('/home/user/dev/'+'texts/stopwords.txt')
+                stopwords_file=stopwords_file or ('text-corpus/stopwords.txt')
             )
         self.__term_candidates_cache = self.__extract_terms(self.text, quiet=quiet)
         assert self.__term_candidates_cache, "No significant words it text... (All the words seem to be removed as stopwords)"
