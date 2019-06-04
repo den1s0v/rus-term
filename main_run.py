@@ -66,6 +66,14 @@ def process_text(txt, sent_by_part_list=[40], min_count=None, sieve_limit=50):
     work_chapter = Chapter()
     results = work_chapter.run_on_text(txt, sent_by_part_list, min_count=min_count, limit=sieve_limit)
     
+    if not results:
+        print('Cannot extract anything!')
+        print('   Text size:        ', len(txt) // 1024, 'KB')
+        print('   Sentences found:  ', len(work_chapter.sentence_list))
+        print('   Sentences by part:', sent_by_part_list)
+        print('Pass bigger text or decrease numbers in `sent_by_part` parameter!')
+        exit()
+    
     print("Ranking algorithms finished:")
     for k in results.keys():
         print('\t', k)
