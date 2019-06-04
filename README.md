@@ -5,9 +5,12 @@
 Другими словами, стиль текстов скорее научный и научно-популярный, чем публицистический и разговорный.
 
 ### Демо / проверка работоспособности
-Запустите в консоли
+Запустите в консоли тест на работоспособность классов Chapter и функций работы с паттернами "дефиниций":
 
 <code>$ python def_ptt_run.py </code>
+
+Результатом должно стать, как минимум, отсутствие исключительных ситуаций.
+Также в папке `result/` должен появиться файл `def-19terms-min2.pkl` с pickle-дампом списка терминов.
 
 ### Запуск
 
@@ -38,3 +41,18 @@
 - RuTermExtract (0.3): `$ pip install rutermextract`
 - pymorphy2: `$ conda install pymorphy2` или `$ pip install pymorphy2`
 - _[необязательно]_ python-Levenshtein (0.12.0):  `$ pip install python-Levenshtein`
+
+#### Установка зависимостей - всё вместе:
+- Если у вас есть `conda` (из пакетов Anaсonda/Miniconda):
+
+<pre>conda install pandas -y
+conda install pymorphy2 -y
+pip install rutermextract
+</pre>
+
+- Если у вас только `pip` (стандартный менеджер пакетов Python):
+
+<pre>pip install pandas
+pip install pymorphy2
+pip install rutermextract
+</pre>
