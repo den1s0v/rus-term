@@ -103,7 +103,7 @@ if __name__ == '__main__':
         print(k.rjust(15),":",getattr(args,k))
     
     try:
-        with open(args.PATH, "r", newline="") as file:
+        with open(args.PATH, "r", newline="", encoding='utf-8') as file:
             txt = file.read()
     except Exception as e:
         print("Error!")
@@ -118,7 +118,7 @@ if __name__ == '__main__':
     
     save_path = "result/extracted-min%d%s.txt" % (args.min_count, ("-lim%d" % args.limit) if args.limit else "")
     
-    with open(save_path, "w", newline="") as file:
+    with open(save_path, "w", newline="", encoding='utf-8') as file:
         file.write("# Source text: "+args.PATH+"\n")
         file.write("# Parameters :")
         file.write( " sent_by_part="+ (','.join(map(str,args.sent_by_part))) )

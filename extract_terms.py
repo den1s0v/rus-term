@@ -340,7 +340,7 @@ class Lemmatizer(object):
 def load_wordset(stops_file):
     " Загрузить список слов, например стоп-слова "
     try:
-        with open(stops_file,'r') as file:
+        with open(stops_file,'r', encoding='utf-8') as file:
             words = file.read().split();
         return set(words);
     except:

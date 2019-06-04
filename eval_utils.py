@@ -535,7 +535,7 @@ if __name__ == '__main__':
     word_colloc_sep = "::"
     experts_terms_file = "../texts/" + "it_concept_list.txt"
 
-    with open(experts_terms_file,'r') as file:
+    with open(experts_terms_file,'r', encoding='utf-8') as file:
         words = file.read().split()
     #         loaded_corpus_word_groups.append( line.split(" ") )
     singleword_expert_terms = {w for w in words if word_colloc_sep not in w}

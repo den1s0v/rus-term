@@ -12,7 +12,7 @@ if __name__ == '__main__':
 
     book_dir = './text-corpus/'
 
-    with open(book_dir+'patterns.txt', "r", newline="") as file:
+    with open(book_dir+'patterns.txt', "r", newline="", encoding='utf-8') as file:
         txt = file.read()
         
     print(len(txt), 'chars in text')

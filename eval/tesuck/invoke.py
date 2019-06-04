@@ -27,7 +27,7 @@ parser.add_argument('-e', '--endpoint',
                     help='Endpoint URI')
 args = parser.parse_args()
 
-with open(args.input, 'r') as input:
+with open(args.input, 'r', encoding='utf-8') as input:
     text = input.read()
 
 url = urlparse(args.endpoint)
@@ -50,7 +50,7 @@ conn.request('POST', url.path, params, headers)
 response = conn.getresponse()
 data = response.read()
 
-with open(args.output, 'w') as output:
+with open(args.output, 'w', encoding='utf-8') as output:
   output.write(data)
 
 conn.close()

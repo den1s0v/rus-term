@@ -625,7 +625,7 @@ if __name__ == '__main__':
     # import os
     # print(os.getcwd())
     
-    with open('../texts/patterns.txt', "r", newline="") as file:
+    with open('../texts/patterns.txt', "r", newline="", encoding='utf-8') as file:
         txt = file.read()
         
     # shrink text

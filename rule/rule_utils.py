@@ -19,7 +19,7 @@ def get_definition_patterns_extended(filename="definition_patterns.txt"):
 def load_hash_commented_file(filename, keep_empty_lines=False, cut_eol_comment=False):
     """ get list of lines (strings) """
     lines = []
-    with open(filename) as f:
+    with open(filename, encoding='utf-8') as f:
         for line in f:
             if re_hash_comment.match(line):
                 continue # commented line
