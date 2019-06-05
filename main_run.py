@@ -11,11 +11,6 @@ def parse_cmdline():
         sent_by_part      (for -s option)
         query             (for -q option)
         limit             (for -l option)
-        OverwriteArticles (for -w option)
-        toSleep           (for -s option)
-        Timeout           (for -to option)
-        QuietLog          (for -ql option)
-
     """
     parser = argparse.ArgumentParser(
         description='Extract terms in Russian from a textfile'
@@ -100,10 +95,17 @@ if __name__ == '__main__':
     print('\n =========== TERM EXTRACTION START ===========\n')
 
     args = parse_cmdline()
-
+    
+    try:
+        assert args.limit is None or args.limit > 0, "limit parameter must be positive, but %s provided" % str(args.limit)
+        assert args.min_count > 0, "min_count parameter must be positive, but %s provided" % str(args.min_count)
+        assert all({v > 0 for v in args.sent_by_part}), "sent_by_part parameter must contain positive intrgers only, but it does not: %s" % str(args.sent_by_part)
+    except Exception as e:
+        print("Error!")
+        print(e)
+        exit()
 
     prepare_dir("result")
-
 
     print("Startup parameters:")
     print()
