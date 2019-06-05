@@ -111,7 +111,7 @@ if __name__ == '__main__':
         print(k.rjust(15),":",getattr(args,k))
     
     try:
-        with open(args.PATH, "r", newline="", encoding='utf-8') as file:
+        with open(args.PATH, "r", encoding='utf-8') as file:
             txt = file.read()
     except Exception as e:
         print("Error!")
