@@ -5,10 +5,6 @@ import math
 import re
 import pandas as pd
 
-# import our class Family & more...
-# from concepts.word_family import *
-
-# from concepts.extract_terms import *?
 from extract_terms import ExtractTerms
 
 
@@ -27,7 +23,6 @@ class Position:
         self.sentence = sentence
 
 
-# sentence_sep_re = re.compile(r"\W+")
 sentence_word_re = re.compile(r"(?:[А-ЯЁа-яёA-Za-z](?:[-`']\w+)*)+", flags=re.UNICODE)
 
 class Sentence:
@@ -140,10 +135,10 @@ class Sentence:
             return []
 #         return position) # кол-во "доживших индексов"
         return sorted([p-n+1 for p in positions]) # список индексов первых слов совпадений со словами предложения
-        
-        
 
-class Chapter(object):  # Глава
+
+class Chapter(object):
+    """ Глава """
 
     def __init__(self, title='NoTitle', text=None, sentences=None, extract_terms_instance=None):
         self.sentence_list = sentences or []
@@ -156,15 +151,12 @@ class Chapter(object):  # Глава
         if text and type(text) is str:
             self.load_text(text)
         
-        # self.__weights_cache = None
         self.__time_weights_cache = None
         self.__extract_terms = extract_terms_instance or None
         self.__lemmatize = None
         self.__vocabulary_cache = None
         self.__term_candidates_cache = None
-        
-        
-        
+    
     def clear_cache(self):
         " reset cached data if any "
         self.__time_weights_cache = None
@@ -198,7 +190,6 @@ class Chapter(object):  # Глава
             current_pos.sentence += 1
 
             self.add_sentence( snt )
-
         
     def add_sentence(self, sentence):
         """ Добавить предложение (типа Sentence) в конец Главы """
@@ -262,7 +253,6 @@ class Chapter(object):  # Глава
             )
         self.__term_candidates_cache = self.__extract_terms(self.text, quiet=quiet)
         assert self.__term_candidates_cache, "No significant words it text... (All the words seem to be removed as stopwords)"
-        
         
     def lemmatize_sentences(self):
         """Make a vocabulary from the text"""
@@ -392,7 +382,7 @@ class Chapter(object):  # Глава
         
     def count_of(self, word):
         return sum([s.count_of(word) for s in self.sentence_list])
-        # ckeck if word is an array
+        # ckecks if word is an array
         
     def raw_profile(self, word):
         "returns list[float]"
@@ -400,9 +390,6 @@ class Chapter(object):  # Глава
         
     def raw_weights(self):
         "returns list[float]"
-        # if not self.__weights_cache:
-        #     self.__weights_cache = [s.size() for s in self.sentence_list]
-        # return self.__weights_cache
         return [s.size() for s in self.sentence_list]
 
     def timeSeries_weights(self):
@@ -563,12 +550,8 @@ def prepare_df4corr(dataframe, treshold4part, treshold4text):
     return df
 
 
-
-    
-    
-
-#! uses outer variable `stopwords`
 def should_exclude(word):
+#! uses outer variable `stopwords`
     wlen = len(word)
     for stopw in stopwords:
         if abs(len(stopw) - wlen) > 2:

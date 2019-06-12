@@ -8,7 +8,6 @@ from extract_terms import copyTerm
 STOPWORDS_PATH = './'+'text-corpus/stopwords.txt'
 
 
-
 def interleave_lists(*lists):
     """ Returns plain list of lists`s elements.
         Elements are positioned by each list`s order 
@@ -73,11 +72,8 @@ def ch2test_sets(ch):
         "title"    : text2collocations(ch.user_data["title"], max_N=4, uniqualize=True),
         "keywords" : ch.user_data["keywords"],
         "abstract" : text2collocations(ch.user_data["abstract"], max_N=5, uniqualize=True),
-#         "topic"    : text2collocations(ch.user_data["topic"], max_N=4, uniqualize=True),
     }
     
-# STOPWORDS_PATH = '/home/user/dev/'+'texts/stopwords.txt'
-STOPWORDS_PATH = './'+'text-corpus/stopwords.txt'
 
 class Booklet(object):
     """ Книга, брошюра. Последовательность Глав (класс Chapter). """

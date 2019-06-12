@@ -120,7 +120,6 @@ if __name__ == '__main__':
         print(e)
         exit()
         
-        
     print(len(txt) // 1024, 'kBytes of text loaded.')
     print()
     
@@ -140,7 +139,6 @@ if __name__ == '__main__':
         
         file.write("\n".join(terms))
         file.write("\n")
-    
     
     print('Saved result:', save_path)
 

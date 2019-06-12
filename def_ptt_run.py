@@ -22,7 +22,6 @@ if __name__ == '__main__':
 
     main_chapter.prepare_terms()
     
-    
     # Init definition_pattern
     init_module(morph = main_chapter.get_morph())
 

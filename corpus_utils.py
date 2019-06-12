@@ -8,7 +8,6 @@ HABR_POSTS_DIR = 'text-corpus/habr/posts'
 CYBERLENINKA_ARTICLES_DIR = 'text-corpus/cyberleninka/articles'
 
 
-
 def load_article(pid, dir='.', quiet=False):
     """ Загружает pickle-объект из файла вида {pid}.pkl """
     fpath = '{dir}/{pid}.pkl'.format(dir=dir, pid=pid)
@@ -76,15 +75,14 @@ def load_habr_corpus(limit=None, min_keywords=0):
     return corpus
 
 
-# ['year', 'url', 'text', 'article-ID', 'topic', 'title',
-# 'keywords', 'number', 'abstract', 'similar', 'Authors', 'status']
-
 def load_cyberlen_corpus(limit=None, min_keywords=0, dir=CYBERLENINKA_ARTICLES_DIR):
     """
     load_cyberlen_corpus(limit=None, min_keywords=0)
       -> list(dict('id'->str, 'text'->str, 'title'->str, 'keywords'->[str], 'similar'->list))
     Similar: список названий и URL-ов похожих статей с исходной страницы
     """
+    # ['year', 'url', 'text', 'article-ID', 'topic', 'title',
+    # 'keywords', 'number', 'abstract', 'similar', 'Authors', 'status']
     assert min_keywords >= 0
     assert limit is None or limit > 0
     

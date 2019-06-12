@@ -222,12 +222,6 @@ class ExtractTerms(object):
                     rank = sum([t_lemma_scores[lemma] for lemma in ptt_intersection])
                     t_ranks.append(rank)
 
-                    ###
-                    # if 'цвет' in str(ptt_intersection):
-                        # print('rank for',ptt_intersection,':', t.normalized, '(',list(map(str,t.words)),')')
-                        # print('t_lemma_scores:',t_lemma_scores)
-    # #                     print({joined_terms[i][0].normalized: t_ranks[i] for i in range(len(joined_terms))})
-
                 # find index of max rank
                 max_rank_i = t_ranks.index(max(t_ranks))
 
@@ -252,19 +246,6 @@ class ExtractTerms(object):
                     # # base_term.alt_normalized = [(t.normalized, t.count) for t,_ in joined_terms  if t!=base_term]
                     # # base_term.alt_words = [t.words for t,_ in joined_terms  if t!=base_term]
                 judged_terms.append( base_term )
-
-
-        #     def _join_old(joined_terms):
-        #         if len(joined_terms) == 1:
-        #             return joined_terms[0]
-        #         else:
-        #             max_count = max([t.count for t in joined_terms])
-        #             sum_count = sum([t.count for t in joined_terms])
-        #             base_term = copyTerm([t for t in joined_terms  if t.count==max_count][0])
-        #             base_term.count = sum_count
-        #             # add other norm forms
-        #             base_term.alt_normalized = [(t.normalized, t.count) for t in joined_terms  if t!=base_term]
-        #             return base_term
 
         patterns.clear()
         joined.clear()
