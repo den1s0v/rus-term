@@ -6,6 +6,7 @@ import re
 import pandas as pd
 
 from extract_terms import ExtractTerms
+# from .extract_terms import ExtractTerms
 
 
 text_sep_re = re.compile(r"(?<=[.!?])\s+(?=[A-ZА-ЯЁ])|(?<=\n)\s+(?=[A-ZА-ЯЁ](?![A-ZА-ЯЁ]))")
